@@ -1,4 +1,4 @@
-export const services = {
+const services = {
     row1: [
         {
             name: "Front End Web Development",
@@ -10,3 +10,5 @@ export const services = {
         }
     ]
 };
+
+export default services;
