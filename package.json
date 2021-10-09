@@ -13,6 +13,7 @@
     "react-dom": "^17.0.2",
     "react-particles-js": "^3.5.3",
     "react-scripts": "4.0.3",
+    "react-scrolling-effects": "^0.5.0",
     "react-typing-effect": "^2.0.5",
     "tsparticles": "^1.35.1",
     "web-vitals": "^1.1.2"
