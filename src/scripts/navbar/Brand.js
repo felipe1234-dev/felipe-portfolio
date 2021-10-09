@@ -1,7 +1,7 @@
 const Brand = ({ menu, toggle }) => (
     <div className="navbar-brand">
         <div
-            className={`navbar-burger burger${menu && " is-active"}`}
+            className={`navbar-burger burger${menu ? " is-active" : ""}`}
             onClick={toggle}
         >
             <span></span>
