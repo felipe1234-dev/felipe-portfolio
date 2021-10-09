@@ -1,11 +1,13 @@
-function Card({ title, image, technologies:techs, preview, source:srcCode }) {
+function Card({ title, image, techs, preview, source:srcCode }) {
     return (
         <div className="card">
             <header className="card-header">
                 <p className="card-header-title">
                     <span>{title}</span>
                     <span classNameName="is-pulled-right">
-                        {techs.map(tech => <span className="tag" tech={tech} />)}
+                        {techs.map(tech => (
+                            <span className="tag" tech={tech}>{tech}</span>
+                        ))}
                     </span>
                 </p>
             </header>
@@ -27,3 +29,5 @@ function Card({ title, image, technologies:techs, preview, source:srcCode }) {
         </div>
     );
 }
+
+export default Card;
