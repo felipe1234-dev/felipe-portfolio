@@ -1,3 +1,5 @@
+import React from "react";
+
 function Resume() {
     return (
         <section className="section" id="resume">
@@ -18,3 +20,5 @@ function Resume() {
         </section>
     );
 }
+
+export default Resume;

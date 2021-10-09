@@ -1,4 +1,5 @@
-import projects from "src/json/projects";
+import Card from "./Card";
+import { projects } from "src/json";
 
 function Projects() {
     return (
