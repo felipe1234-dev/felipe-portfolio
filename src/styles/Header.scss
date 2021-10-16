@@ -1,0 +1,47 @@
+@import "variables";
+@import "mixins";
+
+.hero.is-link {
+    background-color: transparent;
+    color: map-get($header, "text");
+
+    .particle-background {
+        @include cover;
+        position: fixed;
+        top: 0;
+    }
+
+    @include waving-hand;
+    
+    .waving-hand {
+        display: inline-flex;
+
+        animation-name: wave-animation; 
+        /* Refers to the name of your @keyframes element below */
+        
+        animation-duration: 2.5s;
+        /* Change to speed up or slow down */
+
+        animation-iteration-count: infinite;
+        /* Never stop waving :) */
+        
+        transform-origin: 70% 70%;
+        /* Pivot around the bottom-left palm */
+    }
+
+    .hero-foot .tabs {
+        padding-bottom: 0.5em;
+
+        .container ul li {
+            @each $link, $color in $links {
+                &[website="#{$link}"] {
+                    @include animated-underline($color);
+
+                    a i {
+                        color: $color;
+                    }
+                }
+            }
+        }
+    }
+}
