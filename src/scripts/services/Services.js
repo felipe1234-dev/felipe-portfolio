@@ -1,4 +1,4 @@
-import { services } from "src/json";
+import { services } from "src/info";
 
 function Services() {
     return (

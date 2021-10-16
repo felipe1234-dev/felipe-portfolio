@@ -1,5 +1,5 @@
 import Card from "./Card";
-import { projects } from "src/json";
+import { projects } from "src/info";
 
 function Projects() {
     return (
