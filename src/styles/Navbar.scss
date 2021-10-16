@@ -1,0 +1,18 @@
+@import "variables";
+@import "mixins";
+
+.navbar.is-link {
+    background-color: map-get($navbar, "background");
+
+    .navbar-end > a.navbar-item {
+        @each $section, $color in $sections {
+            &[href="##{$section}"] {
+                @include animated-underline($color);
+            }
+        }
+
+        &:hover, &:focus {
+            background-color: lighten(map-get($navbar, "background"), 5%);
+        }
+    }
+}
