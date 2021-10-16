@@ -4,7 +4,7 @@ function Card({ title, image, techs, preview, source:srcCode }) {
             <header className="card-header">
                 <p className="card-header-title">
                     <span>{title}</span>
-                    <span classNameName="is-pulled-right">
+                    <span className="is-pulled-right">
                         {techs.map(tech => (
                             <span className="tag" tech={tech}>{tech}</span>
                         ))}
