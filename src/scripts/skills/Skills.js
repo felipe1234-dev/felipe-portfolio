@@ -1,6 +1,6 @@
 import { skills } from "src/info";
 
-function Skills() {
+function Skills({ isVisible }) {
     return (
         <section 
             id="skills" 
@@ -34,8 +34,8 @@ function Skills() {
                                         {skill.name} - {skill.percent}%
                                         <progress 
                                             className="progress is-small" tech={skill.name}
-                                            value={skill.percent} max="100"
-                                        ></progress>
+                                            value={isVisible ? skill.percent : 0} max="100"
+                                        />
                                     </div>
                                 ))}
                             </div>
