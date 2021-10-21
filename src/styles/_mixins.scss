@@ -16,29 +16,71 @@
     }
 } 
 
+@mixin animation($options...) {
+    -webkit-animation: $options;
+    -moz-animation: $options;
+    animation: $options;
+}
+
 @mixin cover($backgroundColor: transparent) {
     min-height: 100vh;
     min-width: 100vw;
     background-color: $backgroundColor;
 }
 
-@mixin fit-content {
-    width: -moz-fit-content;
-    width: fit-content;
+@mixin fit-content($prop: both) {
+    @if $prop == "width" or $prop == "both" {
+        width: -moz-fit-content;
+        width: fit-content;
+    }
+    
+    @if $prop == "height" or $prop == "both" {
+        height: -moz-fit-content;
+        height: fit-content;
+    }
+}
+
+@mixin center-div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin quality-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 
 @mixin waving-hand {
+    @include animation(wave-animation 2.5s infinite); 
+    transform-origin: 70% 70%;
+
     @include keyframes(wave-animation) {
         0% { transform: rotate( 0.0deg) }
-        10% { transform: rotate(14.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+        10% { transform: rotate(14.0deg) }  
+        /* The following five values can be played with to make the waving more or less extreme */
         20% { transform: rotate(-8.0deg) }
         30% { transform: rotate(14.0deg) }
         40% { transform: rotate(-4.0deg) }
         50% { transform: rotate(10.0deg) }
-        60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
+        60% { transform: rotate( 0.0deg) }  
+        /* Reset for the last half to pause */
         100% { transform: rotate( 0.0deg) }
     }
 }
+
+/*@mixin glowing-effect($color) {
+    @include animation(glow 1s ease-in-out infinite alternate);
+    @include keyframes(glow) {
+        from {
+            @include shadow(0 0 10px #fff, 0 0 20px #fff, 0 0 30px $color, 0 0 40px $color, 0 0 50px $color, 0 0 60px $color, 0 0 70px $color);
+        }
+        to {
+            @include shadow(0 0 20px #fff, 0 0 30px lighten($color, 15%), 0 0 40px lighten($color, 15%), 0 0 50px lighten($color, 15%), 0 0 60px lighten($color, 15%), 0 0 70px lighten($color, 15%), 0 0 80px lighten($color, 15%));
+        }
+    }
+}*/
 
 @mixin animated-underline($color) {
     position: relative;
@@ -53,11 +95,32 @@
         height: 0.1em;
         background-color: $color;
         transform: translate3d(-100%, 0, 0);
+        transition: transform 300ms;
     }
 
-    &:hover, &:focus {
+    &:hover, &:focus, &[active] {
         &::after {
             transform: translate3d(0, 0, 0);
         }
+    }
+}
+
+@mixin shadow($shadow...) {
+    -webkit-box-shadow: $shadow;
+       -moz-box-shadow: $shadow;       
+            box-shadow: $shadow;
+}
+
+@mixin progress-bar($bar, $value) {
+    &::-moz-progress-bar {
+        background: $bar;
+    }
+  
+    &::-webkit-progress-value {
+        background-image: linear-gradient(to right, $value, darken($value, 15%));
+    }
+  
+    &::-webkit-progress-bar {
+        background: $bar;
     }
 }
