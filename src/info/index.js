@@ -1,11 +1,15 @@
 import author from "./author";
+import about from "./about";
 import projects from "./projects";
 import sections from "./sections";
-import services from "./services";
+import skills from "./skills";
+import resume from "./resume";
 
 export {
     author,
+    about,
     projects,
     sections,
-    services
+    skills,
+    resume
 };
