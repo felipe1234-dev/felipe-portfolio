@@ -1,15 +1,20 @@
+$background-color: #212121;
+$text-color: #E9EBF0;
+
 $navbar: (
     background: #212121
 );
 
-$header: (
-    text: #E9EBF0,
+$card: (
+    background: #1f1e1e,
+    header: #393d3e,
+    footer: #393d3e
 );
 
 $sections: ( 
     home: #e31b6d, 
     about: #ffca28, 
-    services: #2196f3, 
+    skills: #2196f3, 
     resume: #4caf50, 
     projects: #f44336, 
     contact: #673ab7
@@ -18,4 +23,17 @@ $sections: (
 $links: ( 
     github: #6e5494,
     linkedIn: #0077b5
+);
+
+$techs: (
+    React: #5ccfee,
+    SASS: #c36291,
+    HTML: #f25320,
+    CSS: #0072b7,
+    JavaScript: #f0db4f,
+    NodeJS: #79b300,
+    SQLite: #ae8a33,
+    SQL: #ae8a33,
+    PHP: #9b59b6,
+    Java: #f89820
 );
