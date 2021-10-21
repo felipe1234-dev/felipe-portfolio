@@ -16,6 +16,13 @@
     }
 } 
 
+@mixin transition($options...) {
+    -webkit-transition: $options;
+   -moz-transition: $options;
+     -o-transition: $options;
+        transition: $options;
+}
+
 @mixin animation($options...) {
     -webkit-animation: $options;
     -moz-animation: $options;
@@ -70,18 +77,6 @@
     }
 }
 
-/*@mixin glowing-effect($color) {
-    @include animation(glow 1s ease-in-out infinite alternate);
-    @include keyframes(glow) {
-        from {
-            @include shadow(0 0 10px #fff, 0 0 20px #fff, 0 0 30px $color, 0 0 40px $color, 0 0 50px $color, 0 0 60px $color, 0 0 70px $color);
-        }
-        to {
-            @include shadow(0 0 20px #fff, 0 0 30px lighten($color, 15%), 0 0 40px lighten($color, 15%), 0 0 50px lighten($color, 15%), 0 0 60px lighten($color, 15%), 0 0 70px lighten($color, 15%), 0 0 80px lighten($color, 15%));
-        }
-    }
-}*/
-
 @mixin animated-underline($color) {
     position: relative;
     overflow: hidden;
@@ -95,7 +90,7 @@
         height: 0.1em;
         background-color: $color;
         transform: translate3d(-100%, 0, 0);
-        transition: transform 300ms;
+        @include transition(transform 300ms);
     }
 
     &:hover, &:focus, &[active] {
@@ -117,6 +112,7 @@
     }
   
     &::-webkit-progress-value {
+        @include transition(width 5s ease);
         background-image: linear-gradient(to right, $value, darken($value, 15%));
     }
   
