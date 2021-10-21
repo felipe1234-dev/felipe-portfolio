@@ -1,83 +1,90 @@
-import React, { useEffect } from "react";
-import ReactTypingEffect from "react-typing-effect";
+import React, { useState, useEffect, useContext } from "react";
 
 import Bubbles from "./Bubbles";
 import { author } from "src/info";
 
 import "src/styles/Header.scss";
 
-const Typewriter = ReactTypingEffect;
+import { Typewriter } from "src/scripts/global";
 
-const TITLE_1_DELAY = 2000;
-const TITLE_2_DELAY = 5500;
-const TITLE_3_DELAY = 9000;
+import { NavContext } from "../contexts";
+
+const TYPING_SPEED = 225;
+const TYPING_DELAY = 500;
+
+const TEXT_STRING = "Olá! Eu sou";
+const TITLE_STRING = author.name;
+const SUBTITLE_STRING = "Desenvolvedor Web Full Stack 👋";
 
 const PINK = "#e31b6d";
 const GRAY = "#4f4e4d";
 
-function Header() {
+function Header({ isVisible }) {
+    const [renderText, setRenderText] = useState(true);
+    const [renderTitle, setRenderTitle] = useState(false);
+    const [renderSubtitle, setRenderSubtitle] = useState(false);
 
-    useEffect(() => {
-        const $ = query => document.querySelector(query);
+    const [setActiveItem] = useContext(NavContext);
+    
+    const $ = query => document.querySelector(query);
 
-        $("#cursor-1").style.display = "block";
-        $("#cursor-2").style.display = "none";
-        $("#cursor-3").style.display = "none";
+    const restart = () => {
+        setRenderText(true);
+        setRenderTitle(false);
+        setRenderSubtitle(false);
+    }
 
-        setTimeout(() => {
-            $("#cursor-1").style.display = "none";
-            $("#cursor-2").style.display = "block";
-        }, TITLE_2_DELAY);
-
-        setTimeout(() => {
-            $("#cursor-2").style.display = "none";
-            $("#cursor-3").style.display = "block";
-        }, TITLE_3_DELAY);
-
-    }, []);
+    useEffect(() => isVisible ? setActiveItem("home") : restart(), [isVisible]);
 
     const props = {
-        title1: {
-            text: "Olá! Eu sou", 
-            speed: 250,
-            eraseDelay: 3600000,
-            typingDelay: TITLE_1_DELAY,
+        text: {
+            text: TEXT_STRING, 
+            speed: TYPING_SPEED,
             cursorRenderer: cursor => (
-                <span id="cursor-1">
+                <span id="text-cursor">
                     {cursor}
                 </span>
-            )
+            ),
+            onEndCallback: () => {
+                setRenderTitle(true);
+                $("#text-cursor").style.display = "none";
+            }
         },
-        title2: {
-            text: author.name, 
-            speed: 250,
-            eraseDelay: 3600000,
-            typingDelay: TITLE_2_DELAY,
+        title: {
+            text: TITLE_STRING, 
+            speed: TYPING_SPEED,
+            typingDelay: TYPING_DELAY,
             cursorRenderer: cursor => (
-                <h1 
+                <h1
+                    id="title-cursor"
                     className="title is-1" 
-                    id="cursor-2"
                     style={{ color: PINK }}
                 >
                     {cursor}
                 </h1>
             ),
             displayTextRenderer: text => (
-                <h1 
+                <h1
                     className="title is-1"
                     style={{ color: PINK }}
                 >
                     {text}
                 </h1>
-            )
+            ),
+            onEndCallback: () => {
+                setRenderSubtitle(true);
+                $("#title-cursor").style.display = "none";
+            }
         },
-        title3: {
-            text: "Desenvolvedor Web Full Stack 👋",
-            speed: 250,
-            eraseDelay: 3600000,
-            typingDelay: TITLE_3_DELAY,
+        subtitle: {
+            text: SUBTITLE_STRING,
+            speed: TYPING_SPEED,
+            typingDelay: TYPING_DELAY,
             cursorRenderer: cursor => (
-                <h2 className="subtitle is-3" id="cursor-3">
+                <h2 
+                    id="subtitle-cursor" 
+                    className="subtitle is-3"
+                >
                     {cursor}
                 </h2>
             ),
@@ -94,7 +101,7 @@ function Header() {
     }
 
     return (
-        <header 
+        <header
             id="home"
             className={
                 [
@@ -113,15 +120,17 @@ function Header() {
                 connected={true}
             />
 
-            <div className="hero-body">
-                <div className="container">
-                    <Typewriter { ...props.title1 } />
-                    <br />
-                    <Typewriter { ...props.title2 } />
-                    <br />
-                    <Typewriter { ...props.title3 } />
+            {isVisible && (
+                <div className="hero-body">
+                    <div className="container">
+                        {renderText && <Typewriter { ...props.text } />}
+                        <br />
+                        {renderTitle && <Typewriter { ...props.title } />}
+                        <br />
+                        {renderSubtitle && <Typewriter { ...props.subtitle } />}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="hero-foot">
                 <nav className="tabs">
