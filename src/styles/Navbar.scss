@@ -9,7 +9,7 @@
 
         @each $section, $color in $sections {
             i {
-                transition: color 300ms;
+                @include transition(color 300ms);
             }
 
             &[href="##{$section}"] {
