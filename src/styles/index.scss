@@ -31,7 +31,7 @@ body {
 
   @each $tech, $color in $techs {
     progress[tech="#{$tech}"] {
-      @include progress-bar(#ededed, $color);
+      @include progress-bar(#333333, $color);
     }
   }
 
@@ -54,7 +54,7 @@ body {
   &#resume {
     .button.is-link {
       background-color: map-get($sections, "resume");
-      transition: transform 1s;
+      @include transition(transform 1s);
 
       &:hover {
         transform: scale(.9);
