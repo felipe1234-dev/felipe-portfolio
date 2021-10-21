@@ -1,13 +1,14 @@
 import { sections } from "src/info";
 import { scroll, easeOutBounce } from "react-scrolling-effects";
 
-const Anchors = ({ menu }) => (
+const Anchors = ({ menu, activeItem }) => (
     <div className={`navbar-menu${menu ? " is-active" : ""}`}>
         <div className="navbar-end">
             {sections.map(({ label, value, icon }) => (
                 <a
                     className="navbar-item"
                     href={`#${value}`}
+                    active={activeItem === value ? "true" : undefined}
                     onClick={event => {
                         event.preventDefault();
                         scroll(`#${value}`, {
