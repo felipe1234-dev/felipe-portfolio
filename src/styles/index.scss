@@ -1,0 +1,78 @@
+@import "mixins";
+@import "variables";
+
+body {
+  background-color: $background-color;
+  color: $text-color;
+}
+
+.section {
+  @include fit-content("height");
+
+  h3, h4 {
+    color: $text-color;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 6em;
+  }
+
+  @each $section, $color in $sections {
+    &##{$section} .dot {
+      color: $color;
+    }
+  }
+
+  progress.is-small {
+    height: 5px;
+  }
+
+  @each $tech, $color in $techs {
+    progress[tech="#{$tech}"] {
+      @include progress-bar(#ededed, $color);
+    }
+  }
+
+  .tag {
+    color: $text-color;
+    font-weight: bold;
+    margin-right: 5px;
+    background-image: linear-gradient(to right, #6e5494, darken(#6e5494, 5%));
+  }
+
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    &#about, &#skills {
+      .container {
+        width: 60vw;
+      }
+    }
+  }
+
+  &#resume {
+    .button.is-link {
+      background-color: map-get($sections, "resume");
+      transition: transform 1s;
+
+      &:hover {
+        transform: scale(.9);
+        background-color: darken(map-get($sections, "resume"), 5%);
+      }
+    }
+  }
+
+  &#about .image {
+    border: 2px solid map-get($sections, "about");
+    padding: 5px;
+    border-radius: 50%;
+  }
+
+  .image {
+    @include center-div;
+    img {
+      @include quality-img;
+    }
+  }
+}
