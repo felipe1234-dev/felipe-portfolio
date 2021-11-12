@@ -18,7 +18,7 @@
 
 @mixin transition($options...) {
     -webkit-transition: $options;
-   -moz-transition: $options;
+    -moz-transition: $options;
      -o-transition: $options;
         transition: $options;
 }
